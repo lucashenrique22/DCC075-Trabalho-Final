@@ -48,6 +48,8 @@ um ambiente real, com escopo e autorização documentados.
 | resource-api | 5001 | API protegida, autorização por role/escopo |
 | attacker | 6666 | Simula o servidor malicioso |
 
+Detalhes do realm (usuários, clients, escopos): [`docs/01-keycloak-realm.md`](docs/01-keycloak-realm.md)
+
 ## Pré-requisitos
 
 - Docker e Docker Compose v2
