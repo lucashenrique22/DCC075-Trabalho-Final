@@ -14,7 +14,14 @@ services:
     volumes:
       - ./keycloak:/opt/keycloak/data/import:ro
 
-  # Serviços a serem adicionados nas próximas etapas:
-  # client-app:    Flask, porta 5000 (Authorization Code + PKCE)
-  # resource-api:  Flask, porta 5001 (endpoints protegidos com RBAC)
-  # attacker:      Flask, porta 6666 (servidor do atacante, captura de code/token)
+  resource-api:
+      build: ./resource-api
+      depends_on:
+        - keycloak
+      environment:
+        OIDC_ISSUER: http://localhost:${KEYCLOAK_PORT:-8080}/realms/seminario
+        OIDC_JWKS_URL: http://keycloak:8080/realms/seminario/protocol/openid-connect/certs
+        API_AUDIENCE: resource-api
+      ports:
+        - "5001:5001"
+  

@@ -31,6 +31,10 @@ que protege o authorization code. A diferença entre eles é só a configuraçã
 | Vida do access token | 24 h | 5 min |
 | Implicit / password grant | desabilitados | desabilitados |
 
+O client `cli-test` existe **só para testes automatizados** (`scripts/test_rbac.py`): habilita
+password grant para obter tokens com escopos controlados. As aplicações do projeto usam
+Authorization Code + PKCE e nunca o password grant.
+
 O client `resource-api` (bearer-only) existe para ser a **audience** (`aud`) dos tokens.
 A API deve rejeitar tokens cuja audience não seja ela.
 
@@ -38,7 +42,9 @@ A API deve rejeitar tokens cuja audience não seja ela.
 
 - `api:read`, `api:write`, `api:admin`: escopos customizados; cada um inclui `aud=resource-api`
 - `roles`: coloca as realm roles em `realm_access.roles` no access token
-- `fullScopeAllowed=false` nos dois clients, então só as roles mapeadas aparecem no token
+- `fullScopeAllowed=false` nos clients: o token só carrega as roles explicitamente mapeadas ao client
+  (`scopeMappings` do realm: `user` e `admin`). Quem decide quais roles aparecem é o usuário real;
+  o mapeamento apenas libera que elas possam ser emitidas
 
 ## Verificação rápida
 
@@ -60,9 +66,11 @@ Após o login o navegador tenta ir para `localhost:5000/callback` (ainda sem app
 conexão, o que é esperado nesta etapa; o importante é a URL conter `?code=...`).
 Repita sem `code_challenge` no `webapp-secure`: o Keycloak deve recusar (PKCE obrigatório).
 
-## Exportar alterações feitas pelo console
+## Alterar o realm
+
+Edite `keycloak/seminario-realm.json` e reimporte do zero (o realm só é importado se ainda
+não existir, e o banco do Keycloak fica no container):
 
 ```bash
-docker compose exec keycloak /opt/keycloak/bin/kc.sh export --dir /tmp/export --realm seminario --users realm_file
-docker compose cp keycloak:/tmp/export/seminario-realm.json keycloak/seminario-realm.json
+docker compose down -v && docker compose up -d
 ```

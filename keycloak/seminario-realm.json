@@ -322,6 +322,33 @@
       "publicClient": false,
       "standardFlowEnabled": false,
       "directAccessGrantsEnabled": false
+    },
+    {
+      "clientId": "cli-test",
+      "name": "CLI de teste (somente laboratorio)",
+      "description": "Usado apenas por scripts/test_rbac.py para obter tokens com escopos controlados. As aplicacoes NAO usam password grant.",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "fullScopeAllowed": false,
+      "attributes": {
+        "access.token.lifespan": "300"
+      },
+      "defaultClientScopes": [
+        "basic",
+        "profile",
+        "email",
+        "roles"
+      ],
+      "optionalClientScopes": [
+        "api:read",
+        "api:write",
+        "api:admin"
+      ]
     }
   ],
   "users": [
@@ -378,6 +405,29 @@
       ],
       "realmRoles": [
         "user"
+      ]
+    }
+  ],
+  "scopeMappings": [
+    {
+      "client": "webapp-vulnerable",
+      "roles": [
+        "user",
+        "admin"
+      ]
+    },
+    {
+      "client": "webapp-secure",
+      "roles": [
+        "user",
+        "admin"
+      ]
+    },
+    {
+      "client": "cli-test",
+      "roles": [
+        "user",
+        "admin"
       ]
     }
   ]
