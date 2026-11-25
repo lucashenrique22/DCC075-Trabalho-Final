@@ -1,0 +1,76 @@
+body {
+    font-family: system-ui, sans-serif;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 1rem 3rem;
+    color: #222;
+}
+
+.banner {
+    padding: .6rem 1rem;
+    margin: 0 -1rem 1rem;
+    color: #fff;
+    font-size: .95rem;
+}
+
+.banner.vulnerable {
+    background: #b3261e;
+}
+
+.banner.secure {
+    background: #1b7a3d;
+}
+
+nav {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-bottom: .8rem;
+    border-bottom: 1px solid #ddd;
+}
+
+nav form {
+    margin: 0 0 0 auto;
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+}
+
+pre {
+    background: #f4f4f4;
+    padding: 1rem;
+    overflow-x: auto;
+    border-radius: 6px;
+}
+
+code {
+    background: #f4f4f4;
+    padding: 0 .25rem;
+    border-radius: 3px;
+}
+
+.status {
+    font-weight: 600;
+}
+
+.s200,
+.s201 {
+    color: #1b7a3d;
+}
+
+.s401,
+.s403,
+.s400 {
+    color: #b3261e;
+}
+
+input[type=text] {
+    padding: .4rem;
+    width: 60%;
+}
+
+button {
+    padding: .4rem .8rem;
+    cursor: pointer;
+}

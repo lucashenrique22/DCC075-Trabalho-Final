@@ -24,4 +24,18 @@ services:
         API_AUDIENCE: resource-api
       ports:
         - "5001:5001"
+  client-app:
+    build: ./client-app
+    depends_on:
+      - keycloak
+      - resource-api
+    environment:
+      APP_MODE: ${APP_MODE:-vulnerable}
+      FLASK_SECRET_KEY: ${FLASK_SECRET_KEY:-troque-esta-chave}
+      KEYCLOAK_PUBLIC_URL: http://localhost:${KEYCLOAK_PORT:-8080}
+      KEYCLOAK_INTERNAL_URL: http://keycloak:8080
+      API_URL: http://resource-api:5001
+      REDIRECT_URI: http://localhost:5000/callback
+    ports:
+      - "5000:5000"
   

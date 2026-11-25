@@ -265,7 +265,8 @@
         "*"
       ],
       "attributes": {
-        "access.token.lifespan": "86400"
+        "access.token.lifespan": "86400",
+        "post.logout.redirect.uris": "http://localhost:5000/"
       },
       "defaultClientScopes": [
         "basic",
@@ -298,7 +299,8 @@
       ],
       "attributes": {
         "pkce.code.challenge.method": "S256",
-        "access.token.lifespan": "300"
+        "access.token.lifespan": "300",
+        "post.logout.redirect.uris": "http://localhost:5000/"
       },
       "defaultClientScopes": [
         "basic",

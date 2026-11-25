@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Seminário OAuth2{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="banner {{ mode }}">Modo: <strong>{{ mode|upper }}</strong> · client_id: <code>{{ client_id }}</code>
+    </div>
+    <nav>
+        <a href="{{ url_for('index') }}">Início</a>
+        <a href="{{ url_for('profile') }}">Perfil (api:read)</a>
+        <a href="{{ url_for('notes') }}">Notas</a>
+        <a href="{{ url_for('admin') }}">Admin</a>
+        <a href="{{ url_for('search') }}">Busca</a>
+        {% if user %}
+        <form method="post" action="{{ url_for('logout') }}">
+            <span>{{ user }}</span>
+            <input type="hidden" name="csrf" value="{{ csrf }}">
+            <button type="submit">Sair</button>
+        </form>
+        {% else %}
+        <a href="{{ url_for('login') }}" style="margin-left:auto">Entrar</a>
+        {% endif %}
+    </nav>
+    {% block content %}{% endblock %}
+</body>
+
+</html>

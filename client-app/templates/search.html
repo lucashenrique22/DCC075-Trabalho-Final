@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Busca</h1>
+<form method="get" action="{{ url_for('search') }}">
+    <input type="text" name="q" placeholder="termo">
+    <button type="submit">Buscar</button>
+</form>
+{% if q %}<p>Resultados para: {{ q }}</p>
+<p>Nenhum resultado encontrado.</p>{% endif %}
+{% endblock %}

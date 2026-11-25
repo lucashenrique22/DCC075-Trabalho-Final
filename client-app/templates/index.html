@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Laboratório OAuth2 / OpenID Connect</h1>
+{% if user %}
+<p>Autenticado como <strong>{{ user }}</strong>.</p>
+<p>Escopos concedidos ao token: {% for s in granted %}<code>{{ s }}</code> {% else %}nenhum{% endfor %}</p>
+{% else %}
+<p>Você não está autenticado. <a href="{{ url_for('login') }}">Entrar com Keycloak</a>.</p>
+{% endif %}
+{% endblock %}

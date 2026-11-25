@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+<p>Resposta da API: <span class="status s{{ status }}">HTTP {{ status }}</span></p>
+<pre>{{ body }}</pre>
+{% endblock %}
